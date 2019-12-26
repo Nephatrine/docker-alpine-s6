@@ -33,7 +33,7 @@ RUN echo "====== INSTALL PACKAGES ======" \
  && cd /usr/src \
  && git clone https://github.com/skarnet/skalibs.git \
  && cd skalibs \
- && ./configure --enable-clock --enable-monotonic --disable-ipv6 \
+ && ./configure --disable-ipv6 \
  && make -j4 strip \
  && make install \
  \
@@ -41,7 +41,7 @@ RUN echo "====== INSTALL PACKAGES ======" \
  && cd /usr/src \
  && git clone https://github.com/skarnet/nsss.git \
  && cd nsss \
- && ./configure \
+ && ./configure --enable-shared \
  && make -j4 strip \
  && make install \
  \
@@ -49,7 +49,7 @@ RUN echo "====== INSTALL PACKAGES ======" \
  && cd /usr/src \
  && git clone https://github.com/skarnet/execline.git \
  && cd execline \
- && ./configure --enable-nsss \
+ && ./configure --enable-nsss --enable-shared \
  && make -j4 strip \
  && make install \
  \
@@ -57,7 +57,7 @@ RUN echo "====== INSTALL PACKAGES ======" \
  && cd /usr/src \
  && git clone https://github.com/skarnet/s6.git \
  && cd s6 \
- && ./configure --enable-nsss \
+ && ./configure --enable-nsss --enable-shared \
  && make -j4 strip \
  && make install \
  \
@@ -65,7 +65,7 @@ RUN echo "====== INSTALL PACKAGES ======" \
  && cd /usr/src \
  && git clone https://github.com/skarnet/s6-dns.git \
  && cd s6-dns \
- && ./configure \
+ && ./configure --enable-shared \
  && make -j4 strip \
  && make install \
  \
@@ -73,7 +73,7 @@ RUN echo "====== INSTALL PACKAGES ======" \
  && cd /usr/src \
  && git clone https://github.com/skarnet/s6-networking.git \
  && cd s6-networking \
- && ./configure --enable-nsss --enable-ssl=libressl \
+ && ./configure --enable-nsss --enable-shared --enable-ssl=libressl \
  && make -j4 strip \
  && make install \
  \
@@ -81,7 +81,7 @@ RUN echo "====== INSTALL PACKAGES ======" \
  && cd /usr/src \
  && git clone https://github.com/skarnet/s6-rc.git \
  && cd s6-rc \
- && ./configure \
+ && ./configure --enable-shared \
  && make -j4 strip \
  && make install \
  \
@@ -89,7 +89,7 @@ RUN echo "====== INSTALL PACKAGES ======" \
  && cd /usr/src \
  && git clone https://github.com/skarnet/s6-portable-utils.git \
  && cd s6-portable-utils \
- && ./configure \
+ && ./configure --enable-shared \
  && make -j4 strip \
  && make install \
  \
@@ -97,7 +97,7 @@ RUN echo "====== INSTALL PACKAGES ======" \
  && cd /usr/src \
  && git clone https://github.com/skarnet/s6-linux-utils.git \
  && cd s6-linux-utils \
- && ./configure --enable-nsss \
+ && ./configure --enable-nsss --enable-shared \
  && make -j4 strip \
  && make install \
  \
