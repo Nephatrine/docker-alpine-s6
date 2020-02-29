@@ -41,6 +41,7 @@ steps:
     repositories:
       - nephatrine/docker-drone-ci@testing
       - nephatrine/docker-gitea-web@testing
+      - nephatrine/docker-registry@testing
 
 depends_on:
 - default
