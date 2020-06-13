@@ -31,6 +31,20 @@ steps:
       from_secret: wh-infra-id
     webhook_token:
       from_secret: wh-infra-tok
+
+depends_on:
+- default
+
+trigger:
+  status:
+  - success
+  - failure
+
+---
+kind: pipeline
+name: propogate
+
+steps:
 - name: trigger
   image: plugins/downstream
   settings:
@@ -45,8 +59,3 @@ steps:
 
 depends_on:
 - default
-
-trigger:
-  status:
-  - success
-  - failure
