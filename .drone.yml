@@ -10,7 +10,7 @@ platform:
 steps:
 - name: build
   commands:
-  - docker build --pull -t pdr.nephatrine.net/nephatrine/alpine-s6:testing .
+  - docker build --security-opt=seccomp=default.json --pull -t pdr.nephatrine.net/nephatrine/alpine-s6:testing .
   - HOME=/mnt/config/home docker push pdr.nephatrine.net/nephatrine/alpine-s6:testing
   - docker tag pdr.nephatrine.net/nephatrine/alpine-s6:testing nephatrine/alpine-s6:testing
   - HOME=/mnt/config/home docker push nephatrine/alpine-s6:testing
@@ -55,6 +55,7 @@ steps:
     repositories:
       - nephatrine/docker-drone-ci@testing
       - nephatrine/docker-gitea-web@testing
+      - nephatrine/docker-nginx-ssl@testing
       - nephatrine/docker-registry@testing
 
 depends_on:
