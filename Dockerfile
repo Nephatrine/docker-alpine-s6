@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:latest
 LABEL maintainer="Daniel Wolf <nephatrine@gmail.com>"
 
 RUN echo "====== INSTALL PACKAGES ======" \
