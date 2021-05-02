@@ -10,7 +10,7 @@ platform:
 steps:
 - name: build
   commands:
-  - docker build --security-opt=seccomp=default.json --pull -t pdr.nephatrine.net/nephatrine/alpine-s6:testing .
+  - docker build --pull -t pdr.nephatrine.net/nephatrine/alpine-s6:testing .
   - HOME=/mnt/config/home docker push pdr.nephatrine.net/nephatrine/alpine-s6:testing
   - docker tag pdr.nephatrine.net/nephatrine/alpine-s6:testing nephatrine/alpine-s6:testing
   - HOME=/mnt/config/home docker push nephatrine/alpine-s6:testing
@@ -63,6 +63,6 @@ depends_on:
 
 ---
 kind: signature
-hmac: d8c752e78f70dc8a3152011711706b2e35f5c4873a6957576ecfcc3c9440d9a9
+hmac: d4cf9a3bcc800796db1c8ee0ef0466a9dfda61bef1cc3ab4587256a930d2887c
 
 ...
