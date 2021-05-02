@@ -12,60 +12,46 @@ RUN echo "====== INSTALL PACKAGES ======" \
 RUN echo "====== COMPILE S6 ======" \
  && mkdir /usr/src \
  && apk add --virtual .build-s6 build-base git libressl-dev linux-headers \
- && cd /usr/src \
- && git clone https://github.com/skarnet/skalibs.git && cd skalibs \
+ && git -C /usr/src clone --depth=1 https://github.com/skarnet/skalibs.git && cd /usr/src/skalibs \
  && ./configure --disable-ipv6 \
  && make -j4 strip && make install \
- && cd /usr/src \
- && git clone https://github.com/skarnet/nsss.git && cd nsss \
+ && git -C /usr/src clone --depth=1 https://github.com/skarnet/nsss.git && cd /usr/src/nsss \
+ && ./configure --enable-libc-includes --enable-shared \
+ && make -j4 strip && make install \
+ && git -C /usr/src clone --depth=1 https://github.com/skarnet/utmps.git && cd /usr/src/utmps \
+ && ./configure --enable-libc-includes --enable-nsss --enable-shared \
+ && make -j4 strip && make install \
+ && git -C /usr/src clone --depth=1 https://github.com/skarnet/execline.git && cd /usr/src/execline \
+ && ./configure --enable-nsss --enable-shared \
+ && make -j4 strip && make install \
+ && git -C /usr/src clone --depth=1 https://github.com/skarnet/s6.git && cd /usr/src/s6 \
+ && ./configure --enable-nsss --enable-shared \
+ && make -j4 strip && make install \
+ && git -C /usr/src clone --depth=1 https://github.com/skarnet/s6-portable-utils.git && cd /usr/src/s6-portable-utils \
  && ./configure --enable-shared \
  && make -j4 strip && make install \
- && cd /usr/src \
- && git clone https://github.com/skarnet/utmps.git && cd utmps \
+ && git -C /usr/src clone --depth=1 https://github.com/skarnet/s6-linux-utils.git && cd /usr/src/s6-linux-utils \
  && ./configure --enable-nsss --enable-shared \
  && make -j4 strip && make install \
- && cd /usr/src \
- && git clone https://github.com/skarnet/execline.git && cd execline \
- && ./configure --enable-nsss --enable-shared \
- && make -j4 strip && make install \
- && cd /usr/src \
- && git clone https://github.com/skarnet/s6.git && cd s6 \
- && ./configure --enable-nsss --enable-shared \
- && make -j4 strip && make install \
- && cd /usr/src \
- && git clone https://github.com/skarnet/s6-portable-utils.git && cd s6-portable-utils \
+ && git -C /usr/src clone --depth=1 https://github.com/skarnet/s6-dns.git && cd /usr/src/s6-dns \
  && ./configure --enable-shared \
  && make -j4 strip && make install \
- && cd /usr/src \
- && git clone https://github.com/skarnet/s6-linux-utils.git && cd s6-linux-utils \
- && ./configure --enable-nsss --enable-shared \
- && make -j4 strip && make install \
- && cd /usr/src \
- && git clone https://github.com/skarnet/s6-dns.git && cd s6-dns \
- && ./configure --enable-shared \
- && make -j4 strip && make install \
- && cd /usr/src \
- && git clone https://github.com/skarnet/s6-networking.git && cd s6-networking \
+ && git -C /usr/src clone --depth=1 https://github.com/skarnet/s6-networking.git && cd /usr/src/s6-networking \
  && ./configure --enable-nsss --enable-shared --enable-ssl=libressl \
  && make -j4 strip && make install \
- && cd /usr/src \
- && git clone https://github.com/skarnet/s6-rc.git && cd s6-rc \
+ && git -C /usr/src clone --depth=1 https://github.com/skarnet/s6-rc.git && cd /usr/src/s6-rc \
  && ./configure --enable-shared \
  && make -j4 strip && make install \
- && cd /usr/src \
- && git clone https://github.com/skarnet/s6-linux-init.git && cd s6-linux-init \
+ && git -C /usr/src clone --depth=1 https://github.com/skarnet/s6-linux-init.git && cd /usr/src/s6-linux-init \
  && ./configure --enable-nsss --enable-shared --enable-utmps \
  && make -j4 strip && make install \
- && cd /usr/src \
- && git clone https://github.com/just-containers/justc-envdir.git && cd justc-envdir \
+ && git -C /usr/src clone --depth=1 https://github.com/just-containers/justc-envdir.git && cd /usr/src/justc-envdir \
  && ./configure --enable-shared --prefix=/usr \
  && make -j4 strip && make install \
- && cd /usr/src \
- && git clone https://github.com/just-containers/s6-overlay-preinit.git && cd s6-overlay-preinit \
+ && git -C /usr/src clone --depth=1 https://github.com/just-containers/s6-overlay-preinit.git && cd /usr/src/s6-overlay-preinit \
  && ./configure --enable-shared \
  && make -j4 strip && make install \
- && cd /usr/src \
- && git clone https://github.com/just-containers/s6-overlay.git && cd s6-overlay/builder \
+ && git -C /usr/src clone --depth=1 https://github.com/just-containers/s6-overlay.git && cd /usr/src/s6-overlay/builder \
  && egrep 'mkdir -p \$overlaydstpath/|chmod [0-9]+ \$overlaydstpath' build-latest | sed 's/$overlaydstpath/overlay-rootfs/g' > build-here \
  && bash build-here \
  && cd overlay-rootfs \
